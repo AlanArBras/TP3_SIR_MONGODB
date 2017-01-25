@@ -18,20 +18,25 @@ public class MorphiaTest {
         morphia.map(Person.class).map(Address.class);
         Datastore ds = morphia.createDatastore(mongo, "my_database");
 
-        Person p = new Person();
-        p.setName("Tintin");
-
-        Address address = new Address();
-        address.setStreet("123 Some street");
-        address.setCity("Some city");
-        address.setPostCode("123 456");
-        address.setCountry("Some country");
+        Person tintin = new Person();
+        tintin.setName("Tintin");
         //set address
-        p.setAddress(address);
-        // Save the POJO
-        ds.save(p);
-        for (Person e : ds.find(Person.class))
-            System.err.println(e);
+        tintin.createAddress("123 Some street","Some city","123 456","Some country");
+        ds.save(tintin);
 
+        Person gwendal = new Person();
+        gwendal.setName("Gwendal");
+        //set address
+        gwendal.createAddress("321 Any street","Any city","654 321","Any country");
+        ds.save(gwendal);
+
+        // Save the POJO
+        Article article = new Article("banane",3);
+        article.addBuyer(gwendal);
+        article.addBuyer(tintin);
+
+        ds.save(article);
+        for (Article a : ds.find(Article.class))
+            System.err.println(a.toBson());
     }
 }

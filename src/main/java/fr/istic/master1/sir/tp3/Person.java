@@ -1,5 +1,7 @@
 package fr.istic.master1.sir.tp3;
 
+import org.bson.BSONObject;
+import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -10,7 +12,7 @@ import org.mongodb.morphia.annotations.Id;
 @Entity
 public class Person {
     @Id
-    private ObjectId id;
+    private ObjectId objectId;
     private String name;
     private Address address;
 
@@ -22,12 +24,12 @@ public class Person {
         this.name = name;
     }
 
-    public ObjectId getId() {
-        return id;
+    public ObjectId getObjectId() {
+        return objectId;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+    public void setObjectId(ObjectId objectId) {
+        this.objectId = objectId;
     }
 
     public void createAddress(String street, String city, String postCode, String country) {
@@ -52,5 +54,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public BSONObject toBson() {
+        BasicBSONObject res = new BasicBSONObject();
+        if (objectId != null)
+            res.append("objectId", objectId.toString());
+        res.append("name", name);
+        res.append("address", address.toBson());
+        return res;
     }
 }

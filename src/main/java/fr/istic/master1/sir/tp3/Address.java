@@ -1,16 +1,15 @@
 package fr.istic.master1.sir.tp3;
 
-import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Id;
+import org.bson.BSONObject;
+import org.bson.BasicBSONObject;
+import org.mongodb.morphia.annotations.Embedded;
+
 
 /**
  * Created by alan on 1/18/17.
  */
-@Entity
+@Embedded
 public class Address implements Cloneable {
-    @Id
-    private ObjectId id;
     private String street;
     private String city;
     private String postCode;
@@ -24,14 +23,6 @@ public class Address implements Cloneable {
         this.city = city;
         this.postCode = postCode;
         this.country = country;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 
     public String getStreet() {
@@ -68,5 +59,14 @@ public class Address implements Cloneable {
 
     public static Address copy(Address address) throws CloneNotSupportedException {
         return (Address) address.clone();
+    }
+
+    public BSONObject toBson(){
+        BasicBSONObject res = new BasicBSONObject();
+        res.append("rue", street);
+        res.append("ville", city);
+        res.append("code postal", postCode);
+        res.append("pays", country);
+        return res;
     }
 }
