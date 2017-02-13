@@ -14,7 +14,7 @@ Elle accueille les données structurées suivantes : des chaînes de caractères
 ([source](https://redis.io/topics/introduction))
 ###Que peut on faire comme types de requêtes ?
 Chaque structure de données gérée possède des caractéristiques uniques et commandes uniques.
-Il est impossible de requêter les valeurs comme on le fait habituellement avec un WHERE dans une BDR, une valeur en table n'est accessible que via une clé.
+Il est impossible de requêter les valeurs comme on le fait habituellement avec un WHERE dans une BDR, une valeur en table **n'est accessible que via une clé**.
 Alors qu'une clé est stockée comme un tableau de bytes, on utilise essentiellement une string come clé.</br>
 ####Exemples de requêtes selon la structure de données:
 #####Strings
