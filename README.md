@@ -1,4 +1,4 @@
-# TP3: MONGODB
+# [TP3: MONGODB + Morphia / Redis](https://docs.google.com/document/d/17UJm-iS05D5CxLWjhmfujAwQTbC4rG1tjG3F-X7J1P8/edit?usp=sharing])
 ###Rappels:
 * Les "tables" d'une base de données relationnelle (BDR) correspondent à des "collections" en BDOD.
 * Une collection peut accueillir plusieurs structures de données différentes (une entrée = un "document").
