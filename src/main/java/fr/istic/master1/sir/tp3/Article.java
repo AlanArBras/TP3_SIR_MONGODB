@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Bean d'un article composé d'un nom, un nombre d'étoiles et une liste d'acheteurs.
  * Created by alan on 1/18/17.
  */
 @Entity
@@ -23,7 +24,7 @@ public class Article {
     public Article() {
     }
 
-    public Article(String name, int stars) {
+    Article(String name, int stars) {
         this.name = name;
         this.stars = stars;
         buyers = new ArrayList<Person>();
@@ -57,7 +58,7 @@ public class Article {
         return buyers;
     }
 
-    public boolean addBuyer(Person buyer) {
+    boolean addBuyer(Person buyer) {
         if (buyer == null)
             return false;
         else
@@ -69,15 +70,15 @@ public class Article {
         this.buyers = buyers;
     }
 
-    public BSONObject toBson() {
+    BSONObject toBson() {
         BasicBSONObject res = new BasicBSONObject();
-        res.append("objectId", objectId.toString());
-        res.append("name", name);
-        res.append("stars", stars);
+        res.put("objectId", objectId.toString());
+        res.put("name", name);
+        res.put("stars", stars);
         BasicBSONObject buyersBSON = new BasicBSONObject();
         for (Person p : buyers)
-            buyersBSON.append(p.getObjectId().toString(), p.toBson());
-        res.append("buyers", buyersBSON);
+            buyersBSON.put(p.getObjectId().toString(), p.toBson());
+        res.put("buyers", buyersBSON);
         return res;
     }
 }

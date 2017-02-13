@@ -7,6 +7,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 /**
+ * Bean d'une personne possédant un nom et une adresse.
  * Created by alan on 1/18/17.
  */
 @Entity
@@ -16,7 +17,7 @@ public class Person {
     private String name;
     private Address address;
 
-    public Person() {
+    Person() {
 
     }
 
@@ -24,7 +25,7 @@ public class Person {
         this.name = name;
     }
 
-    public ObjectId getObjectId() {
+    ObjectId getObjectId() {
         return objectId;
     }
 
@@ -32,7 +33,7 @@ public class Person {
         this.objectId = objectId;
     }
 
-    public void createAddress(String street, String city, String postCode, String country) {
+    void createAddress(String street, String city, String postCode, String country) {
         address = new Address(street, city, postCode, country);
     }
 
@@ -52,16 +53,16 @@ public class Person {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
-    public BSONObject toBson() {
+    BSONObject toBson() {
         BasicBSONObject res = new BasicBSONObject();
         if (objectId != null)
-            res.append("objectId", objectId.toString());
-        res.append("name", name);
-        res.append("address", address.toBson());
+            res.put("objectId", objectId.toString());
+        res.put("name", name);
+        res.put("address", address.toBson());
         return res;
     }
 }

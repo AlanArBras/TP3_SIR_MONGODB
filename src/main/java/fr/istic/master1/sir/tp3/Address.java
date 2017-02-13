@@ -6,6 +6,7 @@ import org.mongodb.morphia.annotations.Embedded;
 
 
 /**
+ * Bean d'une adresse composée d'une rue, une ville, un code postal et un pays.
  * Created by alan on 1/18/17.
  */
 @Embedded
@@ -18,7 +19,7 @@ public class Address implements Cloneable {
     public Address() {
     }
 
-    public Address(String street, String city, String postCode, String country) {
+    Address(String street, String city, String postCode, String country) {
         this.street = street;
         this.city = city;
         this.postCode = postCode;
@@ -57,16 +58,16 @@ public class Address implements Cloneable {
         this.country = country;
     }
 
-    public static Address copy(Address address) throws CloneNotSupportedException {
+    static Address copy(Address address) throws CloneNotSupportedException {
         return (Address) address.clone();
     }
 
-    public BSONObject toBson(){
+    BSONObject toBson(){
         BasicBSONObject res = new BasicBSONObject();
-        res.append("rue", street);
-        res.append("ville", city);
-        res.append("code postal", postCode);
-        res.append("pays", country);
+        res.put("rue", street);
+        res.put("ville", city);
+        res.put("code postal", postCode);
+        res.put("pays", country);
         return res;
     }
 }
